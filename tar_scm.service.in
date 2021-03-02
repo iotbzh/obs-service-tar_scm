@@ -164,6 +164,11 @@
     <description>Specify a file/glob to be exported directly. Useful for build descriptions like spec files
 which get maintained in the SCM. Can be used multiple times.</description>
   </parameter>
+  <parameter name="tar-generation">
+    <description>Generate an tar file. Default is 'enable'.</description>
+    <allowedvalue>enable</allowedvalue>
+    <allowedvalue>disable</allowedvalue>
+  </parameter>
   <parameter name="package-meta">
     <description>Package the metadata of SCM to allow the user or OBS to update after un-tar.</description>
     <allowedvalue>yes</allowedvalue>
