@@ -245,14 +245,17 @@ class Tasks():
 
         arch.extract_from_archive(extract_src, args.extract,
                                   args.outdir)
-
-        arch.create_archive(
-            scm_object,
-            basename  = basename,
-            dstname   = dstname,
-            version   = version,
-            cli       = args
-        )
+        if ( args.tar_generation == "enable"):
+            logging.debug("scm_object.arch_dir: %s", scm_object.arch_dir)
+            logging.debug("basename: %s", basename)
+            logging.debug("dstname: %s", dstname)
+            arch.create_archive(
+                scm_object,
+                basename  = basename,
+                dstname   = dstname,
+                version   = version,
+                cli       = args
+            )
 
         if detected_changes:
             self._process_changes(args,
