@@ -199,6 +199,8 @@ class Cli():
                             choices=['yes', 'no'], default='no',
                             help='Package the meta data of SCM to allow the '
                                  'user or OBS to update after un-tar')
+        parser.add_argument('--clone-dir-name', default='',
+                            help='Local name of the source directory')
         parser.add_argument('--outdir', required=True,
                             help='osc service parameter for internal use only '
                                  '(determines where generated files go before '

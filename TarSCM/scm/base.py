@@ -294,7 +294,10 @@ class Scm():
         # special handling for cloning bare repositories (../repo/.git/)
         url_path = url_path.rstrip('/')
 
-        self.basename = os.path.basename(os.path.normpath(url_path))
+        if self.args.clone_dir_name:
+            self.basename=self.args.clone_dir_name
+        else:
+            self.basename = os.path.basename(os.path.normpath(url_path))
         self.basename = prefix + self.basename
 
         osc_version = 0
