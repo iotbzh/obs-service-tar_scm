@@ -135,6 +135,9 @@ class Cli():
                             default='enable',
                             help='Whether or not to check server certificate '
                                  'against installed CAs.')
+        parser.add_argument('--tar-generation', choices=['enable', 'disable'],
+                            default='enable',
+                            help='enable or disable the tar generation')
         group = parser.add_mutually_exclusive_group()
         group.add_argument('--include', action='append',
                            default=[], metavar='REGEXP',
