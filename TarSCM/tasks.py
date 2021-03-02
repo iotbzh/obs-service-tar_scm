@@ -246,20 +246,24 @@ class Tasks():
             extract_src = scm_object.clone_dir
         else:
             arch = TarSCM.archive.Tar()
-
+            
         arch.extract_from_archive(extract_src, args.extract,
-                                  args.outdir)
-
+                                    args.exclude, args.outdir)
+        
         arch.extract_rename_from_archive(extract_src, args.extract_rename,
-                                         args.outdir)
+                                    args.outdir)
 
-        arch.create_archive(
-            scm_object,
-            basename  = basename,
-            dstname   = dstname,
-            version   = version,
-            cli       = args
-        )
+        if ( args.tar_generation == "enable"):
+            logging.debug("scm_object.arch_dir: %s", scm_object.arch_dir)
+            logging.debug("basename: %s", basename)
+            logging.debug("dstname: %s", dstname)
+            arch.create_archive(
+                scm_object,
+                basename  = basename,
+                dstname   = dstname,
+                version   = version,
+                cli       = args
+            )
 
         if detected_changes:
             self._process_changes(args,
