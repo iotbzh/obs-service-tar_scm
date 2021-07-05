@@ -171,7 +171,7 @@
   </parameter>
   <parameter name="extract">
     <description>Specify a file/glob to be exported directly. Useful for build descriptions like spec files
-which get maintained in the SCM. Can be used multiple times.</description>
+which get maintained in the SCM. Can be used multiple times. Can be use with exclude.</description>
   </parameter>
   <parameter name="extract-rename">
     <description>Specify a file to be renamed and exported directly. Useful for build descriptions like spec files
