@@ -234,7 +234,7 @@ class Tasks():
         else:
             arch = TarSCM.archive.Tar()
 
-        arch.extract_from_archive(extract_src, args.extract,
+        arch.extract_from_archive(extract_src, args.extract, args.exclude,
                                   args.outdir)
         if ( args.tar_generation == "enable"):
             logging.debug("scm_object.arch_dir: %s", scm_object.arch_dir)
