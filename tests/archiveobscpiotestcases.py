@@ -80,10 +80,11 @@ class ArchiveOBSCpioTestCases(unittest.TestCase):
 
         repodir = os.path.join(self.fixtures_dir, tc_name, 'repo')
         files   = ["test.spec"]
+        excludefiles = []
         outdir  = os.path.join(self.tmp_dir, cl_name, tc_name, 'out')
         arch    = ObsCpio()
         os.makedirs(outdir)
-        arch.extract_from_archive(repodir, files, outdir)
+        arch.extract_from_archive(repodir, files, excludefiles, outdir)
         for fname in files:
             self.assertTrue(os.path.exists(
                 os.path.join(outdir, fname)))
@@ -97,10 +98,11 @@ class ArchiveOBSCpioTestCases(unittest.TestCase):
 
         repodir = os.path.join(self.fixtures_dir, tc_name, 'repo')
         files   = ["test.spec", 'Readme.md']
+        excludefiles = []
         outdir  = os.path.join(self.tmp_dir, cl_name, tc_name, 'out')
         arch    = ObsCpio()
         os.makedirs(outdir)
-        arch.extract_from_archive(repodir, files, outdir)
+        arch.extract_from_archive(repodir, files, excludefiles, outdir)
         for fname in files:
             self.assertTrue(os.path.exists(
                 os.path.join(outdir, fname)))
@@ -114,6 +116,7 @@ class ArchiveOBSCpioTestCases(unittest.TestCase):
 
         repodir = os.path.join(self.fixtures_dir, tc_name, 'repo')
         files   = ['nonexistantfile']
+        excludefiles = []
         outdir  = os.path.join(self.tmp_dir, cl_name, tc_name, 'out')
         arch    = ObsCpio()
         os.makedirs(outdir)
@@ -123,6 +126,7 @@ class ArchiveOBSCpioTestCases(unittest.TestCase):
             arch.extract_from_archive,
             repodir,
             files,
+            excludefiles,
             outdir
         )
 
@@ -135,6 +139,7 @@ class ArchiveOBSCpioTestCases(unittest.TestCase):
 
         repodir = os.path.join(self.fixtures_dir, tc_name, 'repo')
         files   = ['dir1']
+        excludefiles = []
         outdir  = os.path.join(self.tmp_dir, cl_name, tc_name, 'out')
         arch    = TarSCM.archive.ObsCpio()
         os.makedirs(outdir)
@@ -144,6 +149,7 @@ class ArchiveOBSCpioTestCases(unittest.TestCase):
             arch.extract_from_archive,
             repodir,
             files,
+            excludefiles,
             outdir
         )
 
@@ -186,6 +192,7 @@ class ArchiveOBSCpioTestCases(unittest.TestCase):
         tc_name = inspect.stack()[0][3]
         cl_name = self.__class__.__name__
         files   = ['dir1/etc/passwd']
+        excludefiles = []
 
         # create repodir
         repodir = os.path.join(self.tmp_dir, tc_name, 'repo')
@@ -203,6 +210,7 @@ class ArchiveOBSCpioTestCases(unittest.TestCase):
             arch.extract_from_archive,
             repodir,
             files,
+            excludefiles,
             outdir
         )
 
@@ -215,11 +223,12 @@ class ArchiveOBSCpioTestCases(unittest.TestCase):
 
         repodir = os.path.join(self.fixtures_dir, tc_name, 'repo')
         files   = ["test.*"]
+        excludefiles = []
         files_expected = ["test.spec", "test.rpmlintrc"]
         outdir  = os.path.join(self.tmp_dir, cl_name, tc_name, 'out')
         arch    = ObsCpio()
         os.makedirs(outdir)
-        arch.extract_from_archive(repodir, files, outdir)
+        arch.extract_from_archive(repodir, files, excludefiles, outdir)
         for fname in files_expected:
             self.assertTrue(os.path.exists(
                 os.path.join(outdir, fname)))
