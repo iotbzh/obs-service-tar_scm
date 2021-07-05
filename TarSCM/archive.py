@@ -32,11 +32,16 @@ class BaseArchive():
         self.archivefile    = None
         self.metafile       = None
 
-    def extract_from_archive(self, repodir, files, outdir):
+    def extract_from_archive(self, repodir, files, exclude, outdir):
         """Extract all files directly outside of the archive.
         """
         if files is None:
             return
+
+        excludepathpath_glob=[]
+        for excludefilename in exclude:
+            excludepath = os.path.join(repodir, excludefilename)
+            excludepathpath_glob.extend(glob.glob(excludepath))
 
         for filename in files:
             path = os.path.join(repodir, filename)
@@ -46,11 +51,12 @@ class BaseArchive():
                 sys.exit("%s: No such file or directory" % path)
 
             for src in path_glob:
-                r_src = os.path.realpath(src)
-                if not r_src.startswith(repodir):
-                    sys.exit("%s: tries to escape the repository" % src)
+                if src not in excludepathpath_glob:
+                    r_src = os.path.realpath(src)
+                    if not r_src.startswith(repodir):
+                        sys.exit("%s: tries to escape the repository" % src)
 
-                shutil.copy2(src, outdir)
+                    shutil.copy2(src, outdir)
 
     def extract_rename_from_archive(self, repodir, tuples, outdir):
         """Extract and rename all files directly outside of the archive.
