@@ -348,7 +348,12 @@ class Git(Scm):
             sys.exit(msg)
 
         tag_offset = out.strip()
-        versionformat = re.sub('@TAG_OFFSET@', tag_offset,
+        if tag_offset == "0":
+            versionformat = re.sub('\[.*\]', "", versionformat)
+        else:
+            versionformat = re.sub('\[', "", versionformat)
+            versionformat = re.sub('\]', "", versionformat)
+            versionformat = re.sub('@TAG_OFFSET@', tag_offset,
                                versionformat)
         return versionformat
 
